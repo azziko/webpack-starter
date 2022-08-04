@@ -10,4 +10,4 @@ Includes:
 
 > Feel free to pull or fork if it satisfies your needs too__
 
- run ```npm install to pull dependencies ```
+ run ```npm install``` to pull dependencies 
