@@ -1,4 +1,4 @@
-#Webpack starter template I use as a project entry point. 
+## Webpack starter template I use as a project entry point. 
 
 Includes: 
 - React
