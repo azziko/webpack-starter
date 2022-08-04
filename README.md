@@ -8,5 +8,6 @@ Includes:
 - Fontaswesome
 - Dev, Prod
 
-> Feel free to pull or fork if it satisfies your needs too 
-> run npm install to pull dependencies 
+> Feel free to pull or fork if it satisfies your needs too__
+
+ run ```npm install to pull dependencies ```
