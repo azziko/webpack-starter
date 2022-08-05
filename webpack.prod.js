@@ -1,8 +1,11 @@
 const path = require('path')
+const glob = require('glob')
 const common = require('./webpack.config')
 const { merge } = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExctarctPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
 
 module.exports = merge(common, {
     mode: 'production',
@@ -10,6 +13,7 @@ module.exports = merge(common, {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].bundle.js',
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -23,13 +27,18 @@ module.exports = merge(common, {
         ]
     },
     plugins: [
-        new MiniCssExctarctPlugin({ filename: "[name].css"}),
+        new MiniCssExctarctPlugin({ filename: './css/[name].css', chunkFilename: "[id].css"}),
+        new PurgecssPlugin({
+            paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`,  { nodir: true }),
+        }),
     ],
     optimization: {
+        usedExports: true,
         minimizer: [
             new HtmlWebpackPlugin({
                 title: 'Webpack template',
                 filename: 'index.html',
+                favicon: path.resolve(__dirname, 'src', 'assets', 'images', 'icon.png'),
                 template: path.resolve(__dirname, 'src/template.html'),
                 minify: {
                     removeAttributeQuotes: true,
@@ -37,6 +46,7 @@ module.exports = merge(common, {
                     removeComments: true,
                 },
             }),
+            new TerserPlugin(),
         ]
     }
 })

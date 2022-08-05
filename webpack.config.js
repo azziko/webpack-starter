@@ -1,7 +1,6 @@
 const path = require('path')
 
 module.exports = {
-    mode: 'development',
     entry:{ 
         main: path.resolve(__dirname, 'src/index.js'),
         vendor: path.resolve(__dirname, 'src/vendor.js')
@@ -12,10 +11,9 @@ module.exports = {
         publicPath: ".",
         clean: true,
     },
-    performance : {
-        hints : false
+    resolve: {
+        extensions: ['.mjs', '.js'],
     },
-    devtool: false,
     module: {
         rules: [
             {
